@@ -1,0 +1,7 @@
+/* globals.css */
+/* Archivo de estilos globales. Aquí se importan las directivas de Tailwind CSS */
+/* Este archivo es el que Next.js utiliza para aplicar estilos globales en toda la app. */
+
+@import "tailwindcss";
+
+/* Puedes agregar estilos personalizados a continuación */
