@@ -4,4 +4,66 @@
 
 @import "tailwindcss";
 
-/* Puedes agregar estilos personalizados a continuación */
+/* Definición de todas las variantes de la fuente Metropolis */
+@font-face {
+  font-family: Metropolis;
+  src: url('./public/fonts/Metropolis/Metropolis-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./public/fonts/Metropolis/Metropolis-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./public/fonts/Metropolis/Metropolis-ThinItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./public/fonts/Metropolis/Metropolis-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./public/fonts/Metropolis/Metropolis-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+	--swatch--white: #fcfcfc;
+	--swatch--black: #080807;
+	--size--0-75rem: .75rem;
+	--swatch--transparent: #fff0;
+	--swatch--brand-text: var(--swatch--black);
+}
+
+/* Ejemplo de estilos globales */
+h1 {
+  margin: 0.57em 0;
+  font-size: 1.5em;
+  font-weight: 600;
+  font-family: Metropolis, sans-serif;
+}
+
+h2 {
+	margin-top: 20px;
+	font-size: 32px;
+	line-height: 36px
+}
+
+@media screen and (max-width:767px) {
+	h1 {
+		font-size: 1em;
+	}
+}
