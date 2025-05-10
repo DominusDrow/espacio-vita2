@@ -6,6 +6,7 @@
     "start": "serve out"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@tailwindcss/postcss": "^4.0.13",
     "@types/node": "^18.11.5",
     "@types/react": "^18.0.23",

@@ -12,15 +12,52 @@ import logoFooter from "../public/assets/images/logo/vita/Logo_E_02.jpeg"
 import WorkContainer from './components/Work';
 import Button from './components/Button';
 
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const Page: React.FC = () => {
+
+  const containerRef = useRef(null);
+  const bgRef = useRef(null);
+  const contentRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.to(bgRef.current, {
+      yPercent: 60, // Intensifica el efecto parallax
+      opacity: 0.3, // Reduce la opacidad al desplazarse
+      ease: "none",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+
+    gsap.from(contentRef.current, {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top center",
+        toggleActions: "play none none reverse",
+      },
+    });
+  }, []);
+
   return (
     <div className="">
 
-      <section className="w-full h-screen">
+      <section ref={containerRef} className="w-full h-screen">
         <div className='relative w-full h-full flex flex-col justify-end items-end overflow-hidden'>
 
           <div className='absolute flex justify-center items-center w-full h-full lg:h-screen'>
-            <div className='h-[80%]'>
+            <div ref={bgRef} className='h-[80%]'>
               <Image src={logo} alt="Logo Espacio Vita" className="lg:hidden w-full h-full object-cover"/>
               <Image src={image} alt="Wide shot of Haig viewing from a green back yard into the living space" className="hidden lg:block w-full h-full object-cover"/>
             </div>
@@ -38,14 +75,14 @@ const Page: React.FC = () => {
           <div className="z-4 p-6 w-full flex relative">
             <div className="flex justify-between items-end self-end w-full">
               <h1 className="text-[1.5rem] break-words max-w-[25ch] whitespace-nowrap clip-[rect(0,0,0,0)] border-0 w-px h-px mx-auto p-0 absolute inset-x-0 top-0 overflow-hidden">We design homes and spaces guided by your vision, bringing together thoughtful design, collaboration, and creativity to shape homes that simply work for how you live.</h1>
-              <h1 data-lines-split="" data-split-animation="" className="text-[1.5rem] break-words max-w-[25ch]">We design homes and spaces guided by your vision, bringing together thoughtful design, collaboration, and creativity to shape homes that simply work for how you live.</h1>
+              <h1 data-lines-split="" data-split-animation="" className="text-[1.5rem] break-words max-w-[25ch] font-light">We design homes and spaces guided by your vision, bringing together thoughtful design, collaboration, and creativity to shape homes that simply work for how you live.</h1>
               <div className="hero_home_scroll">(SCROLL down)</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10">
+      <section ref={contentRef} className="w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10">
         <div className="flex flex-col items-center lg:flex-row w-full px-4 py-8">
           {/* Columna izquierda (texto) */}
           <div className="text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-right lg:mr-8 lg:self-start">
@@ -101,10 +138,11 @@ const Page: React.FC = () => {
       <section className="w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10">
         <div className="flex justify-between mb-[2rem] items-end">
           <div className="flex text-[102px] uppercase font-bold">Featured Works</div>
-          <div className="flex text-[24px] font-light items-center gap-4">
-            <div className="works_home_works u-text-display">Works</div>
+          <a href='#' 
+            className="flex relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full uppercase text-[24px] font-light items-center gap-4">
+            <div className="">Works</div>
             <div className="works_home_dynamic u-text-display">(06)</div>
-          </div>
+          </a >
         </div>
         <div className="works_collection_wrap w-dyn-list">
           <div className=" grid grid-cols-1 sm:grid-cols-2 gap-20">
@@ -290,7 +328,6 @@ const Page: React.FC = () => {
           <div>MADE BY <span>YAZ RUEDA</span></div>
         </div>
       </footer>
-      
     </div>
   );
 };
