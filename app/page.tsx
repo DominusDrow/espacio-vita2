@@ -5,7 +5,7 @@ import '../public/styles/index.css';
 
 import ofice from "../public/assets/images/ofice.avif"
 import carpinteria from "../public/assets/images/carpinteria.jpg"
-import { logoVitaText, logoVitaRegular, logoVitaWhite, logoVitaSimple as logoFooter } from './components/Logos';
+import { logoVitaText, logoVitaRegular, logoVitaWhite } from './components/Logos';
 import { logoGalaWhite, logoGalaRegular} from './components/Logos';
 import WorkContainer from './components/Work';
 import Button from './components/Button';
@@ -105,11 +105,11 @@ const Page: React.FC = () => {
                 />
               </div>
             </div>
-            <div className={`relative h-full ${isHovered ? 'w-full' : 'w-[0]'} flex items-center justify-center transition-all ease-in-out duration-600`}>
+            <div className={`relative h-full bg-black ${isHovered ? 'w-full' : 'w-0'} flex items-center justify-center transition-all ease-in-out duration-600`}>
               <div className='h-[80%]'>
                 {/* PARA CARPINTERIA */}
                 <Image
-                  src={logoGalaRegular}
+                  src={logoGalaWhite}
                   alt=''
                   className='w-full h-full object-cover'
                 />
@@ -123,10 +123,10 @@ const Page: React.FC = () => {
                 onMouseLeave={() => setIsHovered(false)}
                 onClick={() => setIsHovered(!isHovered)}
               >
-                <div className="btn_default_contain">
+                <div className={`${isHovered ? 'text-white' : 'text-black'} `}>
                   <div className="btn_default_text">Carpintería</div>
                 </div>
-                <div className="g_circle w-6 h-6 border border-black rounded-full transition-all duration-300 ease-in-out group-hover:scale-50 group-hover:bg-black"></div>
+                <div className={`w-3 h-3 ${isHovered ? 'border border-white bg-white scale-50':'border border-black '} rounded-full transition-all duration-300 ease-in-out`}></div>
               </div>
             </div>
           </div>
@@ -141,8 +141,8 @@ const Page: React.FC = () => {
         </div>
       </section>
 
-      <section ref={contentRef} className="w-full z-20 pt-12 lg:pb-20 bg-[#fcfcfc] lg:p-10">
-        <div className="flex flex-col items-center lg:flex-row w-full px-4 p-4 lg:py-8 ">
+      <section id="about-us"ref={contentRef} className="w-full z-20 pt-12 lg:pb-20 bg-[#fcfcfc] lg:p-10">
+        <div className="flex flex-col items-center lg:flex-row w-full px-4 p-4 lg:py-8 lg:mt-10">
           {/* Columna izquierda (texto) */}
           <div className="rise-up text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-right lg:mr-8 lg:self-start">
             <div>Designing</div>
@@ -323,70 +323,6 @@ const Page: React.FC = () => {
 
       </section>
 
-      <footer className='w-full z-20 pt-12 bg-black p-5 lg:p-10'>
-        <div className='grid grid-cols-3 lg:gap-10'>
-          <div className='flex flex-col items-center'>
-            <div className='w-full h-[40px] lg:h-[100px] mb-5'>
-              <Image src={logoFooter} alt={""} className='w-full h-full object-cover' />
-            </div>
-            <div className='w-full h-[200px] lg:h-[400px]'>
-              <Image src="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67b5cecf0984d99b23200bce_image.avif" width={400} height={200} alt={''} className='w-full h-full object-cover'/>
-            </div>
-          </div>
-
-          <div className='w-full px-5 lg:px-10 flex flex-col lg:gap-5 text-white'>
-            <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>(navigation)</div>
-
-            {['Home', 'Works', 'Contact Us'].map((text, idx) => (
-              <div key={idx}>
-                <a className='font-semibold text-[20px] lg:text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
-                  {text}
-                </a>
-              </div>
-            ))}
-          </div>
-
-          <div className='flex flex-col gap-2 lg:gap-5 text-white'>
-            <div className='mb-5'>
-              <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>
-                (Social media)
-              </div>
-            </div>
-
-            <div>
-              <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>
-                (info)
-              </div>
-              <div className='flex flex-col gap-2 text-[8px] lg:text-[16px]'>
-                <div className='flex gap-2'>
-                  <span className='font-semibold'>A:</span>
-                  <span className='font-light'> 101 Days Rd, Grange QLD 4051</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-semibold'>E:</span>
-                  <span className='font-light'> info@vita.com</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-semibold'>P:</span>
-                  <span className='font-light'> 222 345 5678</span>
-                </div>
-                <div className='flex gap-2'>
-                  <span className='font-semibold'>H:</span>
-                  <span className='font-light'> Monday to Friday, 8:30am - 5:00pm</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-
-        </div>
-        <div className='flex justify-between mt-4 text-white font-semibold text-[8px] lg:text-[16px] uppercase'>
-          <div className=''>© 2025 Grupo Espacio Vita</div>
-          <div> instagram</div>
-          <div>facebook</div>
-          <div>MADE BY <span>YAZ RUEDA</span></div>
-        </div>
-      </footer>
     </div>
   );
 };

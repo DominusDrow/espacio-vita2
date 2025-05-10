@@ -1,5 +1,8 @@
 import './globals.css';
 import { ReactNode } from 'react';
+import Footer from './components/Footer';
+import Header from './components/PageHead';
+import MiniNav from './components/MiniNav';
 
 export const metadata = {
   title: 'Mi App con Next.js y Tailwind',
@@ -18,7 +21,10 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
         <meta name="description" content="Espacio de Arquitectura y Carpintería" />
       </head>
       <body className="min-h-screen">
+        <MiniNav/>
+        <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );

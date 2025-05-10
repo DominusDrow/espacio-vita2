@@ -1,68 +1,72 @@
+"use client"
 import React from 'react';
-import Head from 'next/head';
+import Image from 'next/image';
+import { logoVitaRegular,logoGalaRegular } from './Logos';
+import Button from './Button';
+interface PageHeadProps {
+  isHovered?: boolean;
+}
 
-const PageHead: React.FC = () => {
+const PageHead: React.FC<PageHeadProps> = ({isHovered}) => {
+  const menuItems = ["WORKS"];
   return (
-    <Head>
-      <meta charSet="utf-8" />
-      <title>OH Architecture — Timeless Residential &amp; Commercial Spaces in Brisbane</title>
-      <meta
-        name="description"
-        content="We design residential and commercial spaces that feel good to be in, and stand the test of time. Discover how our award-winning, people-first approach to architecture helps you thrive."
-      />
-      <meta property="og:title" content="OH Architecture — Timeless Residential &amp; Commercial Spaces in Brisbane" />
-      <meta
-        property="og:description"
-        content="We design residential and commercial spaces that feel good to be in, and stand the test of time. Discover how our award-winning, people-first approach to architecture helps you thrive."
-      />
-      <meta
-        property="og:image"
-        content="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67d0fa2b4a815824924c8ecf_opengraph.jpg"
-      />
-      <meta property="twitter:title" content="OH Architecture — Timeless Residential &amp; Commercial Spaces in Brisbane" />
-      <meta
-        property="twitter:description"
-        content="We design residential and commercial spaces that feel good to be in, and stand the test of time. Discover how our award-winning, people-first approach to architecture helps you thrive."
-      />
-      <meta
-        property="twitter:image"
-        content="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67d0fa2b4a815824924c8ecf_opengraph.jpg"
-      />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <link
-        href="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/css/oharch.webflow.shared.30b52fcc0.min.css"
-        rel="stylesheet"
-        type="text/css"
-      />
-      <link href="css/index.css" rel="stylesheet" />
-      <link
-        href="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/6762bd133751c3b3ba34170a_Favicon.jpg"
-        rel="shortcut icon"
-        type="image/x-icon"
-      />
-      <link
-        href="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/6762bd1922698f9d6a6a08b6_Web%20Clip.jpg"
-        rel="apple-touch-icon"
-      />
-      <link href="https://www.oharchitecture.com.au/" rel="canonical" />
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-T1P8EGHDGZ"></script>
-      <script
-        type="text/javascript"
-        dangerouslySetInnerHTML={{
-          __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){
-            dataLayer.push(arguments);
-          } 
-          gtag('js', new Date());
-          gtag('set', 'developer_id.dZGVlNj', true);
-          gtag('config', 'G-T1P8EGHDGZ');
-        `,
-        }}
-      />
-    </Head>
+    <div className='absolute top-0 w-full z-30'>
+      {/* Header con el menú */}
+      <header className="px-6 md:px-12 lg:px-24 py-8 relative">
+        <div className="flex justify-between items-center relative">
+          {/* Logo a la izquierda */}
+          <a 
+            href='#'
+            className='flex gap-5 tracking-tight items-center group'
+          >
+            <div className='w-3 h-3 border border-black rounded-full group-hover:bg-black group-hover:scale-80 transition-all ease-in-out duration-300'></div>
+            <div className='flex'>
+              <div className='relative w-[100px] h-[100px] overflow-hidden flex items-center justify-center'>
+                <Image
+                  src={logoVitaRegular}
+                  alt=""
+                  className='absolute top-1/2 left-1/2 w-[200px] h-[200px] -translate-x-1/2 -translate-y-1/2 object-cover'
+                />
+              </div>
+              
+              <div className='relative w-[100px] h-[100px] overflow-hidden flex items-center justify-center'>
+                <Image
+                  src={logoGalaRegular}
+                  alt=""
+                  className='absolute top-1/2 left-1/2 w-[170px] h-[170px] -translate-x-1/2 -translate-y-1/2 object-cover'
+                />
+              </div>
+            </div>
+          </a>
+
+          {/* Menú centrado absolutamente */}
+          <nav className="absolute flex items-center gap-10 right-0 -translate-x-1/2">
+            <ul className="flex gap-6 text-sm font-medium">
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <a href="#" className="relative font-bold text-[24px] overflow-hidden group block ">
+                    <span className="block transition-transform duration-300 group-hover:-translate-y-7">
+                      {item}
+                    </span>
+                    <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-black">
+                      {item}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div>
+              <Button 
+                label={"Get in touch"}
+                onClick={()=>{
+                  console.log('Abrir el contact us');
+                }}
+              />
+            </div>
+          </nav>
+        </div>
+      </header>
+  </div>
   );
 };
 
