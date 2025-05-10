@@ -2,17 +2,15 @@
 import React from 'react';
 import Image from 'next/image';
 import '../public/styles/index.css';
-import image from '../public/assets/images/logo/vita/Logo_VITA.png';
-import logo from '../public/assets/images/logo/vita/EspacioVita_Transp.png';
+
 import ofice from "../public/assets/images/ofice.avif"
 import carpinteria from "../public/assets/images/carpinteria.jpg"
-import logoVitaWhite from "../public/assets/images/logo/vita/EspacioVitaInteriorismo_TranspWhite.png"
-import logoGala from "../public/assets/images/logo/gala/gala_TransWhite.png"
-import logoFooter from "../public/assets/images/logo/vita/Logo_E_02.jpeg"
+import { logoVitaText, logoVitaRegular, logoVitaWhite, logoVitaSimple as logoFooter } from './components/Logos';
+import { logoGalaWhite, logoGalaRegular} from './components/Logos';
 import WorkContainer from './components/Work';
 import Button from './components/Button';
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -20,12 +18,17 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Page: React.FC = () => {
+  const [isHovered, setIsHovered] = useState(false);
 
   const containerRef = useRef(null);
   const bgRef = useRef(null);
   const contentRef = useRef(null);
+  const aboutSectionRef = useRef(null);
 
   useGSAP(() => {
+    const targets = gsap.utils.toArray(".rise-up");
+    const works = gsap.utils.toArray(".overlay");
+
     gsap.to(bgRef.current, {
       yPercent: 60, // Intensifica el efecto parallax
       opacity: 0.3, // Reduce la opacidad al desplazarse
@@ -39,8 +42,7 @@ const Page: React.FC = () => {
     });
 
     gsap.from(contentRef.current, {
-      y: 50,
-      opacity: 0,
+      y:100,
       duration: 1,
       scrollTrigger: {
         trigger: containerRef.current,
@@ -48,27 +50,84 @@ const Page: React.FC = () => {
         toggleActions: "play none none reverse",
       },
     });
+
+    targets.forEach((el: any) => {
+      gsap.fromTo(
+        el,
+        { y: 100, scale: 0.95, opacity: 0 },
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 1.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 100%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    works.forEach((overlay: any) => {
+      gsap.to(overlay, {
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: overlay,
+          start: "top 95%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
   }, []);
 
   return (
     <div className="">
 
       <section ref={containerRef} className="w-full h-screen">
-        <div className='relative w-full h-full flex flex-col justify-end items-end overflow-hidden'>
-
+        <div ref={bgRef}  className='relative w-full h-full flex flex-col justify-end items-end overflow-hidden'>
           <div className='absolute flex justify-center items-center w-full h-full lg:h-screen'>
-            <div ref={bgRef} className='h-[80%]'>
-              <Image src={logo} alt="Logo Espacio Vita" className="lg:hidden w-full h-full object-cover"/>
-              <Image src={image} alt="Wide shot of Haig viewing from a green back yard into the living space" className="hidden lg:block w-full h-full object-cover"/>
+            <div  className='relative h-full w-full flex items-center justify-center'>
+              <div className='h-[80%]'>
+                {/* PARA CARPINTERIA */}
+                <Image 
+                  src={logoVitaRegular} 
+                  alt="Logo Espacio Vita" 
+                  className="lg:hidden w-full h-full object-cover"
+                />
+                <Image 
+                  src={logoVitaText} 
+                  alt="" 
+                  className="hidden lg:block w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className={`relative h-full ${isHovered ? 'w-full' : 'w-[0]'} flex items-center justify-center transition-all ease-in-out duration-600`}>
+              <div className='h-[80%]'>
+                {/* PARA CARPINTERIA */}
+                <Image
+                  src={logoGalaRegular}
+                  alt=''
+                  className='w-full h-full object-cover'
+                />
+              </div>
             </div>
             <div className="-z-30 pointer-events-none w-full h-full absolute bg-[linear-gradient(#08080752,_#302c2633)] opacity-25"></div>
             <div className="w-full hero_collection_details flex justify-end px-6">
-              <a href="http://www.oharchitecture.com.au/project/haig" className="g_link is-hero w-inline-block group relative inline-block">
+              <div 
+                className="peer g_link is-hero w-inline-block group relative inline-block cursor-pointer"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => setIsHovered(!isHovered)}
+              >
                 <div className="btn_default_contain">
                   <div className="btn_default_text">Carpintería</div>
                 </div>
                 <div className="g_circle w-6 h-6 border border-black rounded-full transition-all duration-300 ease-in-out group-hover:scale-50 group-hover:bg-black"></div>
-              </a>
+              </div>
             </div>
           </div>
 
@@ -82,16 +141,16 @@ const Page: React.FC = () => {
         </div>
       </section>
 
-      <section ref={contentRef} className="w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10">
-        <div className="flex flex-col items-center lg:flex-row w-full px-4 py-8">
+      <section ref={contentRef} className="w-full z-20 pt-12 lg:pb-20 bg-[#fcfcfc] lg:p-10">
+        <div className="flex flex-col items-center lg:flex-row w-full px-4 p-4 lg:py-8 ">
           {/* Columna izquierda (texto) */}
-          <div className="text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-right lg:mr-8 lg:self-start">
+          <div className="rise-up text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-right lg:mr-8 lg:self-start">
             <div>Designing</div>
             <div>Homes With</div>
           </div>
 
           {/* Imagen en el centro */}
-          <div className="my-6 lg:my-0">
+          <div className="rise-up my-6 lg:my-0">
             <img
               src="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67b686931de6bcfb778ce746_OH_SIDNEY%C2%A9ANDYMACPHERSON-15_EDIT_FILMGRAIN%20(1).avif"
               alt=""
@@ -100,14 +159,14 @@ const Page: React.FC = () => {
           </div>
 
           {/* Columna derecha (texto) */}
-          <div className="text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-left lg:ml-8 lg:self-end">
+          <div className="rise-up text-black font-bold text-[40px] sm:text-[48px] lg:text-[96px] uppercase leading-none text-center lg:text-left lg:ml-8 lg:self-end">
             <div>People</div>
             <div>At Heart</div>
           </div>
         </div>
 
-        <div className="w-full flex flex-col items-center px-10 ">
-          <div className='text-[24px] text-justify font-thin w-[50%]'>
+        <div className="rise-up w-full flex flex-col items-center lg:px-10">
+          <div className=' text-[24px] text-justify font-thin px-10 lg:p-0 lg:w-[50%] '>
             <p className=''>
               We design spaces for people. No matter
               the scale of the projects, our down-to-earth
@@ -135,17 +194,17 @@ const Page: React.FC = () => {
         </div>
       </section>
 
-      <section className="w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10">
+      <section className="w-full z-20 pt-12 lg:pb-20 bg-[#fcfcfc] p-10">
         <div className="flex justify-between mb-[2rem] items-end">
-          <div className="flex text-[102px] uppercase font-bold">Featured Works</div>
+          <div className="flex text-[42px] lg:text-[102px] uppercase font-bold">Featured Works</div>
           <a href='#' 
-            className="flex relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full uppercase text-[24px] font-light items-center gap-4">
+            className="flex relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full uppercase lg:text-[24px] font-light items-center gap-4">
             <div className="">Works</div>
             <div className="works_home_dynamic u-text-display">(06)</div>
           </a >
         </div>
         <div className="works_collection_wrap w-dyn-list">
-          <div className=" grid grid-cols-1 sm:grid-cols-2 gap-20">
+          <div className=" grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-20">
             <WorkContainer 
               name={"Myrtle Pool House"} 
               id={"01"} 
@@ -216,21 +275,21 @@ const Page: React.FC = () => {
         </div>
       </section>
 
-      <section className='w-full z-20 pt-12 pb-20 bg-[#fcfcfc] p-10'>
-        <div className='flex'>
-          <div className='w-2/3 flex items-center font-bold text-[84px] leading-none uppercase'>
+      <section className='w-full z-20 lg:pt-12 pb-20 bg-[#fcfcfc] p-10'>
+        <div className='rise-up flex'>
+          <div className='w-full lg:w-2/3 flex items-center font-bold text-[42px] lg:text-[84px] leading-none uppercase'>
             <span>Let's build a space that inspures and feels like home</span>
           </div>
-          <div className="w-1/3 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/3 items-center justify-center">
             <div className="flex items-center text-center text-sm md:text-lg gap-4 tracking-wide uppercase text-black">
-              <span className="text-[84px] mr-4">[</span>
-              <span className='font-light text-[20px]'>AN INTERIOR IS THE NATURAL<br />PROJECTION OF THE SOUL</span>
-              <span className="text-[84px] ml-4">]</span>
+              <span className="lg:text-[84px] mr-4">[</span>
+              <span className='font-light text-[9px] lg:text-[20px]'>AN INTERIOR IS THE NATURAL<br />PROJECTION OF THE SOUL</span>
+              <span className="lg:text-[84px] ml-4">]</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 group relative h-[400px] overflow-hidden">
+        <div className="rise-up mt-8 group relative h-[400px] overflow-hidden">
           {/* Imagen 1 + sombra + logo */}
           <div className="absolute inset-0 transition-transform duration-700 ease-in-out group-hover:-translate-x-full">
             {/* Imagen */}
@@ -255,7 +314,7 @@ const Page: React.FC = () => {
 
             {/* Logo encima */}
             <div className="absolute inset-0 flex items-center justify-end z-10 pointer-events-none">
-              <Image src={logoGala} alt="Logo Carpintería" className="w-auto h-auto lg:h-[900px] md:h-full" />
+              <Image src={logoGalaWhite} alt="Logo Carpintería" className="w-auto h-auto lg:h-[900px] md:h-full" />
             </div>
           </div>
         </div>
@@ -264,41 +323,41 @@ const Page: React.FC = () => {
 
       </section>
 
-      <footer className='w-full z-20 pt-12 bg-black p-10'>
-        <div className='grid grid-cols-3 gap-10'>
+      <footer className='w-full z-20 pt-12 bg-black p-5 lg:p-10'>
+        <div className='grid grid-cols-3 lg:gap-10'>
           <div className='flex flex-col items-center'>
-            <div className='w-full h-[100px] mb-5'>
+            <div className='w-full h-[40px] lg:h-[100px] mb-5'>
               <Image src={logoFooter} alt={""} className='w-full h-full object-cover' />
             </div>
-            <div className='w-full h-[400px]'>
+            <div className='w-full h-[200px] lg:h-[400px]'>
               <Image src="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67b5cecf0984d99b23200bce_image.avif" width={400} height={200} alt={''} className='w-full h-full object-cover'/>
             </div>
           </div>
 
-          <div className='w-full px-10 flex flex-col gap-5 text-white'>
-            <div className='font-bold uppercase mb-4'>(navigation)</div>
+          <div className='w-full px-5 lg:px-10 flex flex-col lg:gap-5 text-white'>
+            <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>(navigation)</div>
 
             {['Home', 'Works', 'Contact Us'].map((text, idx) => (
               <div key={idx}>
-                <a className='font-semibold text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
+                <a className='font-semibold text-[20px] lg:text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
                   {text}
                 </a>
               </div>
             ))}
           </div>
 
-          <div className='flex flex-col gap-5 text-white'>
+          <div className='flex flex-col gap-2 lg:gap-5 text-white'>
             <div className='mb-5'>
-              <div className='font-bold uppercase mb-4'>
+              <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>
                 (Social media)
               </div>
             </div>
 
             <div>
-              <div className='font-bold uppercase mb-4'>
+              <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>
                 (info)
               </div>
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-2 text-[8px] lg:text-[16px]'>
                 <div className='flex gap-2'>
                   <span className='font-semibold'>A:</span>
                   <span className='font-light'> 101 Days Rd, Grange QLD 4051</span>
@@ -321,7 +380,7 @@ const Page: React.FC = () => {
           
 
         </div>
-        <div className='flex justify-between mt-4 text-white font-semibold uppercase'>
+        <div className='flex justify-between mt-4 text-white font-semibold text-[8px] lg:text-[16px] uppercase'>
           <div className=''>© 2025 Grupo Espacio Vita</div>
           <div> instagram</div>
           <div>facebook</div>
