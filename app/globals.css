@@ -7,35 +7,35 @@
 /* Definición de todas las variantes de la fuente Metropolis */
 @font-face {
   font-family: Metropolis;
-  src: url('./public/fonts/Metropolis/Metropolis-Regular.ttf') format('truetype');
+  src: url('/fonts/Metropolis/Metropolis-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: Metropolis;
-  src: url('./public/fonts/Metropolis/Metropolis-Bold.ttf') format('truetype');
+  src: url('/fonts/Metropolis/Metropolis-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: Metropolis;
-  src: url('./public/fonts/Metropolis/Metropolis-ThinItalic.ttf') format('truetype');
+  src: url('/fonts/Metropolis/Metropolis-ThinItalic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: Metropolis;
-  src: url('./public/fonts/Metropolis/Metropolis-BoldItalic.ttf') format('truetype');
+  src: url('/fonts/Metropolis/Metropolis-BoldItalic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
 }
 
 @font-face {
   font-family: Metropolis;
-  src: url('./public/fonts/Metropolis/Metropolis-SemiBold.ttf') format('truetype');
+  src: url('/fonts/Metropolis/Metropolis-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
