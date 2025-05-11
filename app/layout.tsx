@@ -1,19 +1,19 @@
+"use client"
 import './globals.css';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import Footer from './components/Footer';
 import Header from './components/PageHead';
 import MiniNav from './components/MiniNav';
-
-export const metadata = {
-  title: 'Mi App con Next.js y Tailwind',
-  description: 'Una aplicación estática utilizando la nueva carpeta app de Next.js 13.',
-};
+import Drawer from '@mui/material/Drawer';
+import { Box } from '@mui/material';
+import ContactForm from './components/ContactForm';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export default function RootLayout({ children }: LayoutProps): JSX.Element {
+
   return (
     <html lang="es">
       <head>
@@ -21,9 +21,10 @@ export default function RootLayout({ children }: LayoutProps): JSX.Element {
         <meta name="description" content="Espacio de Arquitectura y Carpintería" />
       </head>
       <body className="min-h-screen">
-        <MiniNav/>
+        <MiniNav />
+        <ContactForm />
         <Header/>
-        {children}
+          {children}
         <Footer/>
       </body>
     </html>

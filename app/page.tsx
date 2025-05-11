@@ -9,6 +9,7 @@ import { logoVitaText, logoVitaRegular, logoVitaWhite } from './components/Logos
 import { logoGalaWhite, logoGalaRegular} from './components/Logos';
 import WorkContainer from './components/Work';
 import Button from './components/Button';
+import useDrawerStore from './store/contactStore';
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -19,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Page: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { setIsOpen } = useDrawerStore();
 
   const containerRef = useRef(null);
   const bgRef = useRef(null);
@@ -186,9 +188,7 @@ const Page: React.FC = () => {
           <div className="flex justify-center items-center mt-6">
             <Button 
               label={"Contact Us"}
-              onClick={()=>{
-                console.log('Abrir el contact us');
-              }}
+              onClick={() => setIsOpen(true)}
             />
           </div>
         </div>

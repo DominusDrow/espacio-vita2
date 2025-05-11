@@ -3,14 +3,14 @@ import React from 'react';
 import Image from 'next/image';
 import { logoVitaRegular,logoGalaRegular } from './Logos';
 import Button from './Button';
-interface PageHeadProps {
-  isHovered?: boolean;
-}
+import useDrawerStore from '../store/contactStore';
 
-const PageHead: React.FC<PageHeadProps> = ({isHovered}) => {
+const PageHead: React.FC = () => {
   const menuItems = ["WORKS"];
+  const { setIsOpen } = useDrawerStore();
+
   return (
-    <div className='absolute top-0 w-full z-30'>
+    <div className='absolute top-0 w-full z-30 d'>
       {/* Header con el menú */}
       <header className="px-6 md:px-12 lg:px-24 py-8 relative">
         <div className="flex justify-between items-center relative">
@@ -19,7 +19,7 @@ const PageHead: React.FC<PageHeadProps> = ({isHovered}) => {
             href='#'
             className='flex gap-5 tracking-tight items-center group'
           >
-            <div className='w-3 h-3 border border-black rounded-full group-hover:bg-black group-hover:scale-80 transition-all ease-in-out duration-300'></div>
+            <div className='hidden lg:block w-3 h-3 border border-black rounded-full group-hover:bg-black group-hover:scale-80 transition-all ease-in-out duration-300'></div>
             <div className='flex'>
               <div className='relative w-[100px] h-[100px] overflow-hidden flex items-center justify-center'>
                 <Image
@@ -40,27 +40,26 @@ const PageHead: React.FC<PageHeadProps> = ({isHovered}) => {
           </a>
 
           {/* Menú centrado absolutamente */}
-          <nav className="absolute flex items-center gap-10 right-0 -translate-x-1/2">
+          <nav className="flex items-center gap-2 lg:gap-10 ">
             <ul className="flex gap-6 text-sm font-medium">
               {menuItems.map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="relative font-bold text-[24px] overflow-hidden group block ">
+                  <a href="#" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-7">
                       {item}
                     </span>
-                    <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-black">
+                    <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-black text-[16px] lg:text-[24px]">
                       {item}
                     </span>
                   </a>
                 </li>
-              ))}
+                )
+              )}
             </ul>
             <div>
               <Button 
                 label={"Get in touch"}
-                onClick={()=>{
-                  console.log('Abrir el contact us');
-                }}
+                onClick={() => setIsOpen(true)}
               />
             </div>
           </nav>

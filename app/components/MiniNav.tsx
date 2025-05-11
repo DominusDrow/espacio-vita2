@@ -1,25 +1,40 @@
-"use client"
-import React from "react";
-import { motion } from "framer-motion";
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
+import useDrawerStore from '../store/contactStore';
 
 const MiniNav = () => {
+  const [showMiniNav, setShowMiniNav] = useState(false);
+  const { setIsOpen } = useDrawerStore();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowMiniNav(window.scrollY > 150);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <motion.div
-      className="fixed top-6 right-6 z-50"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.4 }}
-    >
-      <Button
-        label="Get in touch"
-        onClick={() => {
-          const section = document.getElementById("contact");
-          if (section) section.scrollIntoView({ behavior: "smooth" });
-        }}
-      />
-    </motion.div>
+    <AnimatePresence>
+      {showMiniNav && (
+        <motion.div
+          className="fixed top-10 right-10 z-50"
+          initial={{ opacity: 0, y: 100 }} // desde fuera de la pantalla abajo
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 100 }}
+          transition={{ type: "spring", stiffness: 70, damping: 12 }}
+        >
+          <Button
+            label="Get in touch"
+            onClick={() => setIsOpen(true)}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
