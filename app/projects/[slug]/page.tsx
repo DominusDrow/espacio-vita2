@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { projects, Project } from '../../../data/projects';
 import { Poppins } from 'next/font/google';
+import Gallery from 'app/components/Gallery';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -20,9 +21,11 @@ export default async function ProjectPage({ params }: Params) {
   const { slug } = await params;
   const project: Project | undefined = projects.find((p) => p.slug === slug);
   if (!project) return null;
+  
+  const imgs = project.images;
 
   return (
-    // Contenedor único, relativo y de altura automática
+    <>
     <div className="relative w-full">
       {/* Imagen de fondo que ocupa todo el contenedor */}
       <Image
@@ -41,18 +44,16 @@ export default async function ProjectPage({ params }: Params) {
         <Link
           href="/"
           className="group block overflow-hidden"
-          style={{ height: '2.25rem' }}
+          style={{ height: '3rem' }}
         >
-          <div className="flex flex-col transition-transform duration-300 ease-in-out group-hover:-translate-y-[2.35rem]">
+          <div className="flex flex-col transition-transform duration-200 ease-in-out group-hover:-translate-y-[3rem]">
             <span
-              className={`text-3xl text-white leading-[2.25rem] ${poppins.className}`}
-              style={{ fontWeight: 700 }}
+              className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight text-white drop-shadow-2xl`}
             >
               Espacio Vita
             </span>
             <span
-              className={`text-3xl text-white leading-[2.25rem] ${poppins.className}`}
-              style={{ fontWeight: 700 }}
+              className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight text-white drop-shadow-2xl`}
             >
               Espacio Vita
             </span>
@@ -60,39 +61,72 @@ export default async function ProjectPage({ params }: Params) {
         </Link>
       </header>
       <div className="absolute top-1/2 left-8 transform -translate-y-1/2 z-20 max-w-xl">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white drop-shadow-lg leading-tight">
+        <h1
+          className={`text-6xl sm:text-7xl md:text-8xl ${poppins.className} font-extrabold uppercase tracking-wide leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white drop-shadow-2xl`}
+        >
           {project.title}
         </h1>
       </div>
+
 
       {/* Spacer para empujar la sección de descripción justo después del viewport */}
       <div className="pt-[100vh]" />
 
       {/* Descripción y detalles, sobre la misma imagen de fondo */}
-      <section className="relative z-20 px-8 pb-16 max-w-3xl mx-auto text-white">
+      <section
+        className="relative z-20 px-8 pb-16 max-w-3xl ml-auto text-right text-white"
+      >
         {/* Descripción */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Descripción</h2>
-          <p>{project.description}</p>
+        <div className="mb-12">
+          <h2
+            className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight drop-shadow-lg mb-4`}
+          >
+            Descripción
+          </h2>
+          <p className="text-lg sm:text-xl font-light leading-relaxed text-gray-100">
+            {project.description}
+          </p>
         </div>
 
         {/* Detalles adicionales */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
           <div>
-            <h3 className="font-medium">Ubicación</h3>
-            <p>{project.location}</p>
+            <h3
+              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+            >
+              Ubicación
+            </h3>
+            <p className="text-base font-medium text-gray-100">
+              {project.location}
+            </p>
           </div>
           <div>
-            <h3 className="font-medium">Fecha de finalización</h3>
-            <p>{project.dateCompleted}</p>
+            <h3
+              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+            >
+              Fecha de finalización
+            </h3>
+            <p className="text-base font-medium text-gray-100">
+              {project.dateCompleted}
+            </p>
           </div>
           <div>
-            <h3 className="font-medium">Tipo de proyecto</h3>
-            <p>{project.projectType}</p>
+            <h3
+              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+            >
+              Tipo de proyecto
+            </h3>
+            <p className="text-base font-medium text-gray-100">
+              {project.projectType}
+            </p>
           </div>
           <div>
-            <h3 className="font-medium">Colaboradores</h3>
-            <ul className="list-disc list-inside">
+            <h3
+              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+            >
+              Colaboradores
+            </h3>
+            <ul className="list-disc list-inside text-base font-medium text-gray-100 space-y-1">
               {project.collaborators.map((c) => (
                 <li key={c}>{c}</li>
               ))}
@@ -100,6 +134,13 @@ export default async function ProjectPage({ params }: Params) {
           </div>
         </div>
       </section>
+
+
     </div>
+
+    {/* GALLERY LAYOUT */}
+    <Gallery imgs={project.images} title={project.title} />
+
+    </>
   );
 }
