@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import '../public/styles/index.css';
 
-import ofice from "../public/assets/images/ofice.avif"
+import ofice from "../public/assets/images/ofice.jpg"
 import carpinteria from "../public/assets/images/carpinteria.jpg"
 import { logoVitaText, logoVitaRegular, logoVitaWhite } from './components/Logos';
 import { logoGalaWhite, logoGalaRegular} from './components/Logos';
