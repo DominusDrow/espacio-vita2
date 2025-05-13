@@ -22,7 +22,7 @@ const Footer = () => {
           </div>
 
           <div className='w-full h-[200px] lg:h-[400px]'>
-            <Image src="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67b5cecf0984d99b23200bce_image.avif" width={400} height={200} alt={''} className='w-full h-full object-cover'/>
+            <Image src="/assets/images/footer.png" width={400} height={200} alt={''} className='w-full h-full object-cover'/>
           </div>
         </div>
 
