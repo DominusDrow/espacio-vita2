@@ -1,19 +1,31 @@
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { projects, Project } from '../../../data/projects';
-import Gallery from 'app/components/Gallery';
-
-interface Params { params: { slug: string } }
+// app/projects/[slug]/page.tsx
+import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { projects, Project } from '../../../data/projects'
+import Gallery from 'app/components/Gallery'
 
 export function generateStaticParams(): { slug: string }[] {
-  return projects.map((proj) => ({ slug: proj.slug }));
+  return projects.map((p) => ({ slug: p.slug }))
 }
 
-export default async function ProjectPage({ params }: Params) {
-  const { slug } = await params;
-  const project: Project | undefined = projects.find((p) => p.slug === slug);
-  if (!project) return null;
+// Aquí aceptamos las dos realidades:
+// - en SSG (build) Next pasará `{ slug: string }`
+// - en dev (runtime) Next pasará `Promise<{ slug: string }>`
+type ProjectPageProps = {
+  params: { slug: string } | Promise<{ slug: string }>
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  // Esto cubre ambos casos:
+  // - si `params` es promesa, la await rompe la promesa
+  // - si es objeto, await lo retorna directo
+  const { slug } = await params
+
+  const project: Project | undefined = projects.find((p) => p.slug === slug)
+  if (!project) return null
+
+
   
   const imgs = project.images;
 
