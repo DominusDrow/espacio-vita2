@@ -6,7 +6,6 @@ import Button from './Button';
 import useDrawerStore from '../store/contactStore';
 
 const PageHead: React.FC = () => {
-  const menuItems = ["WORKS"];
   const { setIsOpen } = useDrawerStore();
 
   return (
@@ -16,7 +15,7 @@ const PageHead: React.FC = () => {
         <div className="flex justify-between items-center relative">
           {/* Logo a la izquierda */}
           <a 
-            href='#'
+            href='/'
             className='flex gap-5 tracking-tight items-center group'
           >
             <div className='hidden lg:block w-3 h-3 border border-black rounded-full group-hover:bg-black group-hover:scale-80 transition-all ease-in-out duration-300'></div>
@@ -42,19 +41,16 @@ const PageHead: React.FC = () => {
           {/* Menú centrado absolutamente */}
           <nav className="flex items-center gap-2 lg:gap-10 ">
             <ul className="flex gap-6 text-sm font-medium">
-              {menuItems.map((item, index) => (
-                <li key={index}>
-                  <a href="/projects" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
-                    <span className="block transition-transform duration-300 group-hover:-translate-y-7">
-                      {item}
-                    </span>
-                    <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-black text-[16px] lg:text-[24px]">
-                      {item}
-                    </span>
-                  </a>
-                </li>
-                )
-              )}
+              <li>
+                <a href="/projects" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
+                  <span className="block transition-transform duration-300 group-hover:-translate-y-7">
+                    WORKS
+                  </span>
+                  <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-black text-[16px] lg:text-[24px]">
+                    WORKS
+                  </span>
+                </a>
+              </li>
             </ul>
             <div>
               <Button 

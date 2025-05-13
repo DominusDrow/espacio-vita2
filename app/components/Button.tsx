@@ -4,7 +4,7 @@ import React from 'react';
 
 interface ButtonProps {
   label: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   // The onClick event is handled internally.
 }
 

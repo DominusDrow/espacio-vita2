@@ -11,6 +11,7 @@ import { logoGalaWhite, logoGalaRegular} from './components/Logos';
 import WorkContainer from './components/Work';
 import Button from './components/Button';
 import useDrawerStore from './store/contactStore';
+import Header from './components/PageHead';
 
 import { useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -89,6 +90,7 @@ const Page: React.FC = () => {
 
   return (
     <div className="">
+      <Header/>
 
       <section ref={containerRef} className="w-full h-screen">
         <div ref={bgRef}  className='relative w-full h-full flex flex-col justify-end items-end overflow-hidden'>
@@ -155,7 +157,7 @@ const Page: React.FC = () => {
           {/* Imagen en el centro */}
           <div className="rise-up my-6 lg:my-0">
             <img
-              src="https://cdn.prod.website-files.com/6762bbe3294789635ee71fdb/67b686931de6bcfb778ce746_OH_SIDNEY%C2%A9ANDYMACPHERSON-15_EDIT_FILMGRAIN%20(1).avif"
+              src="/assets/images/about.jpg"
               alt=""
               className="w-[220px] sm:w-[260px] lg:w-[280px] object-cover"
             />
@@ -207,21 +209,21 @@ const Page: React.FC = () => {
         <div className="works_collection_wrap w-dyn-list">
           <div className=" grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-20">
             <WorkContainer 
-              name={"Myrtle Pool House"} 
+              name={"Proyect A"} 
               id={"01"} 
               state={"Under Construction"} 
               year={2025} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67ec864b321b2073a6618701_OH_POOLHOUSE%C2%A9ANDYMACPHERSON-21%20(1).avif"} 
-              url={"http://www.oharchitecture.com.au/project/myrtle-pool-house"} 
+              urlImage={"/proyectB/espacio-vita1.jpg"} 
+              url={"/projects/proyecto-a"} 
               imgClass={"w-full h-auto"}
             />
             <WorkContainer 
-              name={"Haig"} 
+              name={"Proyect B"} 
               id={"02"} 
               state={""} 
               year={2024} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67be91596f129dc684d4c711_OG%20HAIG%20Andy%20Macpherson%204.avif"} 
-              url={"http://www.oharchitecture.com.au/project/haig"}
+              urlImage={"/proyectA/espacio-vita1.jpg"} 
+              url={"/projects/proyecto-b"}
               imgClass={"w-full h-auto"}
             />
             <WorkContainer 
@@ -229,8 +231,8 @@ const Page: React.FC = () => {
               id={"03"} 
               state={"Under Construction"} 
               year={2023} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67bea5e36abd92ebf2bbabed_OH_SIDNEYANDYMACPHERSON-23.avif"} 
-              url={"http://www.oharchitecture.com.au/project/hawken"}
+              urlImage={"/assets/images/sidney.png"} 
+              url={"/projects/proyecto-a"} 
               imgClass={"w-full h-auto"}
             />
 
@@ -239,8 +241,8 @@ const Page: React.FC = () => {
               id={"04"} 
               state={""} 
               year={2023} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67cae1a8c4cbd6b6c175fa5c_A12.avif"} 
-              url={"http://www.oharchitecture.com.au/project/clifton"}
+              urlImage={"/assets/images/clifton.png"} 
+              url={"/projects/proyecto-a"} 
               imgClass={"w-full h-auto"}
             />
 
@@ -249,8 +251,8 @@ const Page: React.FC = () => {
               id={"05"} 
               state={""} 
               year={2023} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67c90160500ec1ec18d1d2f1_A2.avif"} 
-              url={"http://www.oharchitecture.com.au/project/heal"}
+              urlImage={"/assets/images/heal.png"} 
+              url={"/projects/proyecto-a"} 
               imgClass={"w-full h-auto"}
             />
 
@@ -259,21 +261,18 @@ const Page: React.FC = () => {
               id={"06"} 
               state={""} 
               year={2023} 
-              urlImage={"https://cdn.prod.website-files.com/678f62698d1043f9f15c0cec/67cb9dd68d07464c05bdfa69_A1.avif"} 
-              url={"http://www.oharchitecture.com.au/project/sidney"}
+              urlImage={"/assets/images/hawken.png"} 
+              url={"/projects/proyecto-a"}
               imgClass={"w-full h-auto"}
             />
 
           </div>
         </div>
-        <div className="flex w-full justify-center mt-10">
+        <Link href="/projects" className="flex w-full justify-center mt-10">
           <Button 
             label={"Portfolio"}
-            onClick={()=>{
-              console.log('Abrir el contact us');
-            }}
           />
-        </div>
+        </Link>
       </section>
 
       <section className='w-full z-20 lg:pt-12 pb-20 bg-[#fcfcfc] p-10'>

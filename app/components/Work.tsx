@@ -1,4 +1,6 @@
+"use client"
 import type { Work } from 'app/utils/types/Work'
+import Link from 'next/link';
 import React from 'react'
 
 interface WorkComponentProps extends Work {
@@ -10,7 +12,10 @@ interface WorkComponentProps extends Work {
 const Work: React.FC<WorkComponentProps> = ({ name, id, description, state, year, urlImage, url, imgClass }) => {
   return (
     <div className="">
-        <a href={url} className="flex flex-col justify-between group">
+        <Link 
+            href={url} 
+            className="flex flex-col justify-between group"
+        >
             <div className="relative overflow-hidden group flex items-center h-full w-auto ">
                 <img 
                     src={urlImage} 
@@ -42,7 +47,7 @@ const Work: React.FC<WorkComponentProps> = ({ name, id, description, state, year
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     </div>
   )
 }

@@ -2,14 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { projects, Project } from '../../../data/projects';
-import { Poppins } from 'next/font/google';
 import Gallery from 'app/components/Gallery';
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['600', '700'],
-  variable: '--font-poppins',
-});
 
 interface Params { params: { slug: string } }
 
@@ -40,29 +33,45 @@ export default async function ProjectPage({ params }: Params) {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60 z-10" />
 
       {/* Header y título */}
-      <header className="absolute top-0 left-0 w-full p-8 z-20 flex items-center bg-transparent">
+      <header className="absolute top-0 left-0 w-full p-8 z-20 flex items-center justify-between bg-transparent">
         <Link
           href="/"
-          className="group block overflow-hidden"
+          className="group flex justify-between overflow-hidden"
           style={{ height: '3rem' }}
         >
           <div className="flex flex-col transition-transform duration-200 ease-in-out group-hover:-translate-y-[3rem]">
             <span
-              className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight text-white drop-shadow-2xl`}
+              className={`text-4xl sm:text-5xl font-bold uppercase tracking-tight text-white drop-shadow-2xl`}
             >
               Espacio Vita
             </span>
             <span
-              className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight text-white drop-shadow-2xl`}
+              className={`text-4xl sm:text-5xl font-bold uppercase tracking-tight text-white drop-shadow-2xl`}
             >
               Espacio Vita
             </span>
           </div>
         </Link>
+
+        <nav className="flex items-center gap-2 lg:gap-10 text-white lg:mr-5 ">
+          <ul className="flex gap-6 text-sm font-medium">
+              <li >
+                <a href="/projects" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
+                  <span className="block transition-transform duration-300 group-hover:-translate-y-7">
+                    Works
+                  </span>
+                  <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-8 text-[16px] lg:text-[24px]">
+                    Works
+                  </span>
+                </a>
+              </li>
+          </ul>
+        </nav>
       </header>
+
       <div className="absolute top-1/2 left-8 transform -translate-y-1/2 z-20 max-w-xl">
         <h1
-          className={`text-6xl sm:text-7xl md:text-8xl ${poppins.className} font-extrabold uppercase tracking-wide leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white drop-shadow-2xl`}
+          className={`text-6xl sm:text-7xl md:text-8xl font-extrabold uppercase tracking-wide leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white drop-shadow-2xl`}
         >
           {project.title}
         </h1>
@@ -79,7 +88,7 @@ export default async function ProjectPage({ params }: Params) {
         {/* Descripción */}
         <div className="mb-12">
           <h2
-            className={`text-4xl sm:text-5xl ${poppins.className} font-extrabold uppercase tracking-tight drop-shadow-lg mb-4`}
+            className={`text-4xl sm:text-5xl font-extrabold uppercase tracking-tight drop-shadow-lg mb-4`}
           >
             Descripción
           </h2>
@@ -92,7 +101,7 @@ export default async function ProjectPage({ params }: Params) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
           <div>
             <h3
-              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+              className={`text-2xl font-semibold uppercase tracking-wide mb-2`}
             >
               Ubicación
             </h3>
@@ -102,7 +111,7 @@ export default async function ProjectPage({ params }: Params) {
           </div>
           <div>
             <h3
-              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+              className={`text-2xlfont-semibold uppercase tracking-wide mb-2`}
             >
               Fecha de finalización
             </h3>
@@ -112,7 +121,7 @@ export default async function ProjectPage({ params }: Params) {
           </div>
           <div>
             <h3
-              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+              className={`text-2xl  font-semibold uppercase tracking-wide mb-2`}
             >
               Tipo de proyecto
             </h3>
@@ -122,7 +131,7 @@ export default async function ProjectPage({ params }: Params) {
           </div>
           <div>
             <h3
-              className={`text-2xl ${poppins.className} font-semibold uppercase tracking-wide mb-2`}
+              className={`text-2xl font-semibold uppercase tracking-wide mb-2`}
             >
               Colaboradores
             </h3>

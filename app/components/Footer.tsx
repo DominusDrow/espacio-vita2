@@ -28,14 +28,20 @@ const Footer = () => {
 
         <div className='w-full px-5 lg:px-10 flex flex-col lg:gap-5 text-white'>
           <div className='font-bold text-[9px] lg:text-[16px] uppercase mb-4'>(navigation)</div>
-
-          {['Home', 'Works'].map((text, idx) => (
-            <div key={idx}>
-              <a className='font-semibold text-[20px] lg:text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
-                {text}
-              </a>
-            </div>
-          ))}
+          <div >
+            <a
+              href='/' 
+              className='font-semibold text-[20px] lg:text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
+              Home
+            </a>
+          </div>
+          <div >
+            <a 
+              href='/projects'
+              className='font-semibold text-[20px] lg:text-[42px] relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full'>
+              Works
+            </a>
+          </div>
           <div>
             <a 
               onClick={() => setIsOpen(true)}
