@@ -198,7 +198,7 @@ const Page: React.FC = () => {
       <section className="w-full z-20 pt-12 lg:pb-20 bg-[#fcfcfc] p-10">
         <div className="flex justify-between mb-[2rem] items-end">
           <div className="flex text-[42px] lg:text-[102px] uppercase font-bold">Featured Works</div>
-          <a href='#' 
+          <a href='/projects' 
             className="flex relative cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-black after:transition-all after:duration-300 hover:after:w-full uppercase lg:text-[24px] font-light items-center gap-4">
             <div className="">Works</div>
             <div className="works_home_dynamic u-text-display">(06)</div>

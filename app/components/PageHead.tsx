@@ -44,7 +44,7 @@ const PageHead: React.FC = () => {
             <ul className="flex gap-6 text-sm font-medium">
               {menuItems.map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
+                  <a href="/projects" className="relative font-bold text-[16px] lg:text-[24px] overflow-hidden group block ">
                     <span className="block transition-transform duration-300 group-hover:-translate-y-7">
                       {item}
                     </span>
