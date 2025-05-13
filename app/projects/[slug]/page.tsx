@@ -139,8 +139,9 @@ export default async function ProjectPage({ params }: Params) {
     </div>
 
     {/* GALLERY LAYOUT */}
-    <Gallery imgs={project.images} title={project.title} />
-
+    <div className="max-w-7xl mx-auto px-8">
+      <Gallery imgs={project.images} title={project.title} />
+    </div>
     </>
   );
 }
